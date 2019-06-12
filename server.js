@@ -21,9 +21,14 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 //Database config
+var databaseUrl = 'mongodb://localhost:27017/Escrap';
 
-
-mongoose.connect(process.env.MongoDB_URI);
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+	mongoose.connect(databaseUrl, { useNewUrlParser: true });
+};
 var db = mongoose.connection;
 
 mongoose.set('useNewUrlParser', true);
@@ -51,13 +56,13 @@ app.get("/scrape", function (req, res) {
         //tell it what to find and what to do with it, for each hgroup...
         $('hgroup').each(function (i, element) {
             var result = {};
+            console.log('hit');
             //declare variable and save html bit you want
             result.title = $(this).children('h1').children('a').text();
             //what else do you want? declare and store for each instance of element
             result.link = $(this).children('h1').children('a').attr("href");
             //var firstLine = $('this').parent('header').next('.post-lead').children('p').html();
             //for now lets console log the info....
-            console.log('title:' + title);
             //console.log(title); -->successfully printed to console! yay... moving on
             //if both of these exist, save to the database!
             var entry = new Article(result);
