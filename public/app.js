@@ -8,10 +8,10 @@ function getArticles() {
             //console.log(data[i].title);
             //console.log(data[i].link);
             if (data[i].notes.length > 0) {
-            $("#posts").append("<li class='list-group-item post-title' data-id='" + data[i]._id + "'>" + data[i].title + "<br><a href='http://reactkungfu.com/" + data[i].link + "'>Link to article</a><span class='badge'>"+data[i].notes.length+"</span></li>");
+            $("#posts").append("<li class='list-group-item post-title' data-id='" + data[i]._id + "'>" + data[i].title + "<br><a href='http://reactkungfu.com/" + data[i].link + "'target='_blank'>Link to article</a><span class='badge'>"+data[i].notes.length+"</span></li>");
             }
             else {
-                $("#posts").append("<li class='list-group-item post-title' data-id='" + data[i]._id + "'>" + data[i].title + "<br><a href='http://reactkungfu.com/" + data[i].link + "'>Link to article</a></li>");
+                $("#posts").append("<li class='list-group-item post-title' data-id='" + data[i]._id + "'>" + data[i].title + "<br><a href='http://reactkungfu.com/" + data[i].link + "'target='_blank'>Link to article</a></li>");
             }
             console.log(data[i].notes.length);
 
