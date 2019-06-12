@@ -1,6 +1,7 @@
 # react-scrapper
 
 This is a scrapper project that scrapes the site http://reactkungfu.com
+This project is also deployed in heroku at: https://ej-reactscrapper.herokuapp.com/
 
 To get the scrape, you will need to use the /scrape in the url.
 
