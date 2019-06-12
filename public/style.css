@@ -1,0 +1,7 @@
+.jumbotron {
+    background: purple;
+    background: -webkit-linear-gradient(red,orange,purple);
+    background: -o-linear-gradient(red,orange,purple);
+    background: -moz-linear-gradient(red,orange,purple);
+    background: linear-gradient(red,orange,purple);
+}
