@@ -1,5 +1,4 @@
 var express = require("express");
-//var mongojs = require("mongojs");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
@@ -7,7 +6,7 @@ var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 mongoose.Promise = Promise;
-//require what makes scraping possible!
+//require what makes scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
 
@@ -34,8 +33,6 @@ var db = mongoose.connection;
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-//hook mongojs config to db var --> replaced with Mongoose connection
-//var db = mongojs(databaseUrl, collections);
 db.on("error", function (error) {
     console.log("Database error message: " + error);
 });
@@ -61,9 +58,8 @@ app.get("/scrape", function (req, res) {
             result.title = $(this).children('h1').children('a').text();
             //what else do you want? declare and store for each instance of element
             result.link = $(this).children('h1').children('a').attr("href");
-            //var firstLine = $('this').parent('header').next('.post-lead').children('p').html();
-            //for now lets console log the info....
-            //console.log(title); -->successfully printed to console! yay... moving on
+            //console log the info....
+            //console.log(title); -->successfully printed to console
             //if both of these exist, save to the database!
             var entry = new Article(result);
             entry.save(function (err, doc) {
@@ -78,7 +74,6 @@ app.get("/scrape", function (req, res) {
             });
         });
     });
-    // res.send("Scrape Complete");
     res.redirect("/");
     console.log("Scrape complete!");
 });
@@ -123,7 +118,7 @@ app.get("/articles/:id", function (req, res) {
     Article.findOne({
             "_id": req.params.id
         })
-        // ..and populate all of the notes associated with it
+        // populate all of the notes associated with it
         .populate("notes")
         // now, execute our query
         .exec(function (error, doc) {
